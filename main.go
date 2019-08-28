@@ -18,16 +18,30 @@ func (h *MyHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(200)
 
 	write(w, "<html><body>")
-	write(w, "bunda <b>mole</b>")
-	write(w, "<ul><li>lelele</li></ul>")
+	write(w, "<p>Possible urls:</p>")
+	write(w, "<ul><li>/json</li>")
+	write(w, "<li>/hello</li>")
+	write(w, "<li>/foo</li>")
+	write(w, "<li>/products</li>")
+	write(w, "</ul>")
 	write(w, "</body></html>")
 	fmt.Fprint(w)
+}
+
+// HandleHello responds with hello
+func HandleHello(res http.ResponseWriter, req *http.Request) {
+	res.Header().Set("Content-Type", "application/json")
+	fmt.Fprint(res, "{hello: true}")
 }
 
 func main() {
 
 	host := "0.0.0.0:9090"
 	http.Handle("/", new(MyHandler))
+	http.HandleFunc("/hello", HandleHello)
+	http.HandleFunc("/foo", HandleFoo)
+	http.HandleFunc("/json", HandleJSON)
+	http.HandleFunc("/products", HandleProduct)
 
 	var err error
 
