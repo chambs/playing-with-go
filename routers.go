@@ -26,15 +26,13 @@ func HandleJSON(res http.ResponseWriter, req *http.Request) {
 
 	if err != nil {
 		fmt.Println("error marshal", err)
-	} else {
-		// fmt.Println("marshal ok", string(toJSON))
 	}
 	fmt.Fprint(res, string(toJSON))
 }
 
 // HandleProduct handles /product
 func HandleProduct(res http.ResponseWriter, req *http.Request) {
-	products := make([]Product, 4, 4)
+	products := make([]Product, 4)
 
 	products[0] = Product{1, "Pen", 1.0}
 	products[1] = Product{2, "Chocolate", 2.50}
@@ -53,4 +51,8 @@ func HandleProduct(res http.ResponseWriter, req *http.Request) {
 		res.Header().Set("Content-Type", "application/json")
 		fmt.Fprint(res, string(productsAsJSON))
 	}
+}
+
+func SimpleMath(a, b int) int {
+	return a + b
 }
