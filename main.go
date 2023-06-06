@@ -17,7 +17,7 @@ func (h *MyHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	header.Set("Content-Type", "text/html; utf-8")
 	w.WriteHeader(200)
 
-	write(w, "<html><body>")
+	_, _ = write(w, "<html><body>")
 	write(w, "<p>Possible urls:</p>")
 	write(w, "<ul><li>/json</li>")
 	write(w, "<li>/hello</li>")
